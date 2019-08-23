@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+    <%= form_for([@movie, @booking] , local: true) do |form| %>
+      <% if @booking.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@booking.errors.count, "error") %> prohibited this review from being saved:</h2>
+
+          <ul>
+            <% @booking.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <%= image_tag @movie.avatar.url(:medium) %>
+      <div class="field">
+      <%= current_user.full_name %>
+      </div>
+
+      <div class="field">
+        <%= @movie.title %>
+      </div>
+      <div class="field">
+        <%= form.label :name %>
+        <%= form.text_field :name %>
+      </div>
+      <div class="field">
+        <%= form.label :price %>
+        <%= form.text_field :price %>
+      </div>
+      <div class="field">
+        <%= form.label :qty %>
+        <%= form.text_field :qty %>
+      </div>
+      <div class="actions">
+        <%= form.submit %>
+      </div>
+    <% end %>
+  </div>
+</div>

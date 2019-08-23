@@ -9,7 +9,7 @@ class User < ApplicationRecord
 
   has_many :reviews, dependent: :destroy
   has_many :movies
-
+  has_many :bookings
   def full_name
     "#{first_name} #{last_name}"
   end

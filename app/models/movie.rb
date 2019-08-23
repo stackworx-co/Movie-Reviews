@@ -6,5 +6,5 @@ class Movie < ApplicationRecord
 
   validates :title, :director, :movie_length, :description, :genre, :actros,  presence: true
   has_many :reviews, dependent: :destroy
-
+  has_many :bookings
 end

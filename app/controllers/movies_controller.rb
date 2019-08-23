@@ -6,6 +6,7 @@ class MoviesController < ApplicationController
   # GET /movies.json
   def index
     @movies = Movie.all.order("created_at DESC")
+    @movies = scope
   end
 
   # GET /movies/1
@@ -17,6 +18,22 @@ class MoviesController < ApplicationController
       @avg_review = 0
     else
       @avg_review = @reviews.average(:rating).round(2)
+    end
+
+    @movie = scope.find(params[:id])
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "Invoice No. #{@booking.id}",
+               page_size: 'A4',
+               template: "bookings/show.html.erb",
+               layout: "pdf.html",
+               orientation: "Landscape",
+               lowquality: true,
+               zoom: 1,
+               dpi: 75
+      end
     end
  end
   # GET /movies/new
@@ -90,8 +107,11 @@ class MoviesController < ApplicationController
       @movie = Movie.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def movie_params
       params.require(:movie).permit(:title, :description, :movie_length, :director, :rating, :actros, :user_id, :genre, :avatar)
     end
+
+  def scope
+    ::Movie.all.includes(:bookings)
+  end
 end

@@ -33,6 +33,8 @@ gem 'rolify'
 gem "paperclip", "~> 6.0.0"
 gem 'jquery-rails'
 gem 'font-awesome-sass', '~> 5.3.1'
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

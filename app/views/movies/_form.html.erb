@@ -1,60 +1,79 @@
-<%= form_with(model: movie, local: true, html: { multipart: true }) do |form| %>
-  <% if movie.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(movie.errors.count, "error") %> prohibited this movie from being saved:</h2>
 
-      <ul>
-      <% movie.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<body class="bg-gradient-primary">
+
+<div class="container">
+
+  <div class="card o-hidden border-0 shadow-lg my-5">
+    <div class="card-body p-0">
+      <!-- Nested Row within Card Body -->
+      <div class="row">
+        <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+        <div class="col-lg-7">
+          <div class="p-5">
+            <div class="text-center">
+              <h1 class="h4 text-gray-900 mb-4">Create a new Movie!</h1>
+            </div>
+              <%= form_with(model: movie, local: true, html: { multipart: true, :class=> "user"}) do |form| %>
+                <% if movie.errors.any? %>
+                  <div id="error_explanation">
+                    <h2><%= pluralize(movie.errors.count, "error") %> prohibited this movie from being saved:</h2>
+                    <ul>
+                      <% movie.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                      <% end %>
+                    </ul>
+                  </div>
+                <% end %>
+              <div class="form-group">
+                <%= form.label :title %>
+                <%= form.text_field :title,  :class=>"form-control form-control-user", :id =>"exampleFirstName", :placeholder => "Movie Title" %>
+              </div>
+              <div class="form-group">
+                <%= form.label :description %>
+                <%= form.text_area :description,  :class=>"form-control form-control-user",
+                                   :id =>"exampleFirstName", :placeholder => "Place movie's description here ... " %>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                  <%= form.label :movie_length %>
+                  <%= form.text_field :movie_length, :class=>"form-control form-control-user", :id =>"exampleFirstName", :placeholder => "Movie Length" %>
+                </div>
+                <div class="col-sm-6">
+                  <%= form.label :director %>
+                  <%= form.text_field :director, :class=>"form-control form-control-user", :id =>"exampleFirstName", :placeholder => "Movie's director name" %>
+                </div>
+              </div>
+              <div class="form-group">
+                <%= form.label :actros %>
+                <%= form.text_field :actros, :class=>"form-control form-control-user", :id =>"exampleFirstName", :placeholder => "Movie's actors name" %>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                  <%= form.label :genre %><br>
+                  <%= form.select :genre, ["Select", "Action","Horor","Scifi", "Comedy", "Romantic"], :class=>"form-control form-control-user",
+                                  :id =>"exampleFirstName" %>
+                </div>
+                <div class="col-sm-6">
+                  <%= form.label :photo %>
+                  <%= form.file_field :avatar %>
+                </div>
+              </div>
+              <a class="btn btn-primary btn-user btn-block">
+                <%= form.submit :class => "btn btn-primary btn-user btn-block", :value=> "Create Movie!" %>
+              </a>
+            <% end %>
+            <hr>
+            <div class="text-center">
+              <% if @movie.id.present? %>
+              <%= link_to 'Back to Movie!', @movie %> |
+              <% end %>
+              <%= link_to 'Back to Home Page!', movies_path %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
   </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :movie_length %>
-    <%= form.text_field :movie_length %>
-  </div>
-
-  <div class="field">
-    <%= form.label :director %>
-    <%= form.text_field :director %>
-  </div>
-
-<!--  <div class="field">-->
-    <%#= form.label :rating %>
-    <%#= form.text_field :rating %>
-<!--  </div>-->
-
-  <div class="field">
-    <%= form.label :actros %>
-    <%= form.text_field :actros %>
-  </div>
-
-  <div class="field">
-    <%= form.hidden_field :user_id, value: current_user.id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :genre %>
-    <%= form.select :genre, ["Select", "Action","Horor","Scifi", "Comedy", "Romantic"]%>
-    </div>
-    <div class="field">
-      <%= form.file_field :avatar %>
-    </div>
-
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
+</body>
