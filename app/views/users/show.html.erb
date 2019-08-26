@@ -26,6 +26,16 @@
               <strong><span><%= @user.email %></span></strong>
             </div>
               <hr>
+            <% @movies.each do |movie| %>
+              <div>
+                <ol>
+                  <li>
+                    <%= link_to movie.title, movie %>
+                  </li>
+                </ol>
+              </div>
+            <% end %>
+              <hr>
               <div class="text-center">
                 <%= link_to 'Edit Profile', edit_user_registration_path, :class => "small" %>
               </div>
@@ -36,6 +46,7 @@
             </div>
       </div>
     </div>
+
   </div>
 
 </div>

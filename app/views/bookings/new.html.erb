@@ -1,5 +1,6 @@
-<div class="container">
+<div class="container align-content-center">
   <div class="row">
+    <div class="align-content-center">
     <%= form_for([@movie, @booking] , local: true) do |form| %>
       <% if @booking.errors.any? %>
         <div id="error_explanation">
@@ -13,28 +14,31 @@
         </div>
       <% end %>
       <%= image_tag @movie.avatar.url(:medium) %>
+      <br><br>
       <div class="field">
-      <%= current_user.full_name %>
+        <span>User Name: </span>
+        <strong><span><%= current_user.full_name %></span></strong>
       </div>
-
+      <hr>
+        <div class="field">
+          <span>Movie Name: </span>
+          <strong><span><%= @movie.title %></span></strong>
+        </div>
+        <hr>
+        <div class="field">
+          <span>Ticket Price: </span>
+          <strong><span><%= @movie.price %></span></strong>
+        </div>
+        <hr>
       <div class="field">
-        <%= @movie.title %>
+        <%= form.label :quantity %>
+        <%= form.number_field :qty %>
       </div>
-      <div class="field">
-        <%= form.label :name %>
-        <%= form.text_field :name %>
-      </div>
-      <div class="field">
-        <%= form.label :price %>
-        <%= form.text_field :price %>
-      </div>
-      <div class="field">
-        <%= form.label :qty %>
-        <%= form.text_field :qty %>
-      </div>
+        <br>
       <div class="actions">
-        <%= form.submit %>
+        <%= form.submit :class => "btn btn-primary", :value=> "Create Booking"%>
       </div>
     <% end %>
+    </div>
   </div>
 </div>

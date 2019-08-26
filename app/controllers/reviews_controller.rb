@@ -18,6 +18,7 @@ class ReviewsController < ApplicationController
     @review.movie_id = @movie.id
 
     if @review.save
+      @review.update_movie_avg_rating(@movie)
       redirect_to @movie
     else
       render 'new'
@@ -62,4 +63,5 @@ class ReviewsController < ApplicationController
   def review_params
     params.require(:review).permit(:rating, :comment)
   end
+
 end

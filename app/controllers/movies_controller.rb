@@ -15,25 +15,9 @@ class MoviesController < ApplicationController
     @reviews = Review.where(movie_id: @movie.id).order("created_at DESC")
 
     if @reviews.blank?
-      @avg_review = 0
+      @avg_rating = 0
     else
-      @avg_review = @reviews.average(:rating).round(2)
-    end
-
-    @movie = scope.find(params[:id])
-
-    respond_to do |format|
-      format.html
-      format.pdf do
-        render pdf: "Invoice No. #{@booking.id}",
-               page_size: 'A4',
-               template: "bookings/show.html.erb",
-               layout: "pdf.html",
-               orientation: "Landscape",
-               lowquality: true,
-               zoom: 1,
-               dpi: 75
-      end
+      @avg_rating = @reviews.average(:rating).round(2)
     end
  end
   # GET /movies/new
@@ -108,7 +92,7 @@ class MoviesController < ApplicationController
     end
 
     def movie_params
-      params.require(:movie).permit(:title, :description, :movie_length, :director, :rating, :actros, :user_id, :genre, :avatar)
+      params.require(:movie).permit(:title, :description, :movie_length, :director, :rating, :actros, :user_id, :genre, :avatar, :price)
     end
 
   def scope

@@ -12,17 +12,21 @@ class BookingsController < ApplicationController
 
   def show
     @booking = Booking.find(params[:id])
+
     respond_to do |format|
-      format.html
+      # format.html
+      # format.pdf do
+      #   @pdf = render_to_string :pdf => @movie.title,
+      #                           :encoding => "UTF-8",
+      #                           template: "bookings/show.html.erb"
+      #   send_data(@pdf, :filename => "#{@movie.title}.pdf",  :type=>"application/pdf", :layout => "pdf")
+      # end
       format.pdf do
-        render pdf: "Invoice No. #{@booking.id}",
-               page_size: 'A4',
-               template: "bookings/show.html.erb",
-               layout: "pdf.html",
-               orientation: "Landscape",
-               lowquality: true,
-               zoom: 1,
-               dpi: 75
+            render pdf: @movie.title,
+                   template: "bookings/show.html.erb",
+                   page_size: 'A4',
+                   encoding:"UTF-8",
+                   layout: "pdf"
       end
     end
   end
@@ -49,6 +53,6 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    params.require(:booking).permit(:name, :price, :qty)
+    params.require(:booking).permit(:qty)
   end
 end

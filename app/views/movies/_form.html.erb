@@ -47,12 +47,17 @@
                 <%= form.label :actros %>
                 <%= form.text_field :actros, :class=>"form-control form-control-user", :id =>"exampleFirstName", :placeholder => "Movie's actors name" %>
               </div>
+              <div class="form-group">
+                <%= form.label :price %>
+                <%= form.text_field :price, :class=>"form-control form-control-user", :id =>"exampleFirstName", :placeholder => "Movie's ticket's price" %>
+              </div>
               <div class="form-group row">
                 <div class="col-sm-6 mb-3 mb-sm-0">
                   <%= form.label :genre %><br>
                   <%= form.select :genre, ["Select", "Action","Horor","Scifi", "Comedy", "Romantic"], :class=>"form-control form-control-user",
                                   :id =>"exampleFirstName" %>
                 </div>
+
                 <div class="col-sm-6">
                   <%= form.label :photo %>
                   <%= form.file_field :avatar %>

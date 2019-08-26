@@ -6,7 +6,7 @@
       <div class="col-md-4">
         <%= link_to "Book a Ticket!", new_movie_booking_path(@movie, @booking), :class=> "btn btn-primary" %><br><br>
         <%= image_tag @movie.avatar.url(:medium) %>
-        <div class="star-rating" data-score= <%= @avg_review %> ></div>
+        <div class="star-rating" data-score= <%= @avg_rating %> ></div>
         <em><%= "#{@reviews.length} reviews" %></em>
         <div class="table-responsive">
           <table class="table">
@@ -34,6 +34,10 @@
             <tr>
               <td><strong>Genre:</strong></td>
               <td><%= @movie.genre  %></td>
+            </tr>
+            <tr>
+              <td><strong>Price:</strong></td>
+              <td>PKR/- <%= @movie.price  %></td>
             </tr>
             <tr>
               <td><strong>User:</strong></td>
@@ -69,7 +73,6 @@
       <%= link_to 'Edit Movie!', edit_movie_path(@movie) %> |
       <%= link_to 'Back to Home Page', movies_path %>
     </div>
-    <%= link_to "Download", movie_path(@movie, format: :pdf) %>
   </div>
 </div>
 

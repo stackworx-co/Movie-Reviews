@@ -3,49 +3,63 @@
   <div class="panel-body">
     <div class="container">
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-12">
           <%= link_to "DOWNLOAD PDF", movie_booking_path(@movie, @booking, format: :pdf), :class=> "btn btn-primary" %><br><br>
-          <%= image_tag @movie.avatar.url(:medium) %>
-          <div class="table-responsive">
-            <table class="table">
-              <tbody>
-              <tr>
-                <td><strong>Title:</strong></td>
-                <td><%= @movie.title %></td>
-              </tr>
-              <tr>
-                <td><strong>Description:</strong></td>
-                <td><%= @movie.description %></td>
-              </tr>
-              <tr>
-                <td><strong>Movie length:</strong></td>
-                <td><%= @movie.movie_length %></td>
-              </tr>
-              <tr>
-                <td><strong>Director:</strong></td>
-                <td><%= @movie.director %></td>
-              </tr>
-              <tr>
-                <td><strong>Actors:</strong></td>
-                <td><%= @movie.actros %></td>
-              </tr>
-              <tr>
-                <td><strong>Genre:</strong></td>
-                <td><%= @movie.genre  %></td>
-              </tr>
-              <tr>
-                <td><strong>User:</strong></td>
-                <td><%= @movie.user.full_name %></td>
-              </tr>
-              </tbody>
-            </table>
-
-          </div>
+          <%= image_tag @movie.avatar.url(:medium) %><br>
+          <h2><%= @movie.title %></h2>
+          <p><%= @movie.description %></p>
+          <table class="table table-bordered">
+            <thead>
+            <tr>
+              <th>Headings</th>
+              <th>Values</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>Booking ID</td>
+              <td><%= @booking.id %></td>
+            </tr>
+            <tr>
+            <tr>
+              <td>Movie's Name</td>
+              <td><%= @movie.title %></td>
+            </tr>
+            <tr>
+              <td>Movie's Length</td>
+              <td><%= @movie.movie_length %></td>
+            </tr>
+            <tr>
+              <td>Movie's Director </td>
+              <td><%= @movie.director %></td>
+            </tr>
+            <tr>
+              <td>Movie's Actors</td>
+              <td><%= @movie.actros %></td>
+            </tr>
+            <tr>
+              <td>Movie's Genre</td>
+              <td><%= @movie.genre %></td>
+            </tr>
+            <tr>
+              <td>Ticket's Quantity</td>
+              <td><%= @booking.qty %></td>
+            </tr>
+            <tr>
+              <td>Total</td>
+              <td>PKR/- <%= @movie.price * @booking.qty %></td>
+            </tr>
+            <tr>
+              <td>User Name</td>
+              <td><%= @movie.user.full_name %></td>
+            </tr>
+            </tbody>
+          </table>
         </div>
 
         </div>
       </div>
-      <%= link_to 'Edit Movie!', edit_movie_path(@movie) %> |
+<!--      <%#= link_to 'Edit Movie!', edit_movie_path(@movie) %> |-->
       <%= link_to 'Back to Home Page', movies_path %>
     </div>
   </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_23_132443) do
+ActiveRecord::Schema.define(version: 2019_08_26_121134) do
 
   create_table "bookings", force: :cascade do |t|
     t.string "name"
@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(version: 2019_08_23_132443) do
     t.string "avatar_content_type"
     t.integer "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.integer "price"
+    t.decimal "avg_rating"
     t.index ["user_id"], name: "index_movies_on_user_id"
   end
 
