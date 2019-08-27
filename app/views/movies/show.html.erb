@@ -4,8 +4,10 @@
     <div class="container">
     <div class="row">
       <div class="col-md-4">
-        <%= link_to "Book a Ticket!", new_movie_booking_path(@movie, @booking), :class=> "btn btn-primary" %><br><br>
-        <%= image_tag @movie.avatar.url(:medium) %>
+        <% if !current_user.has_role? :admin %>
+          <%= link_to "Book a Ticket!", new_movie_booking_path(@movie, @booking), :class=> "btn btn-primary" %><br><br>
+        <% end %>
+        <%= image_tag @movie.avatar.url(:medium), width: "300", height: "300" %>
         <div class="star-rating" data-score= <%= @avg_rating %> ></div>
         <em><%= "#{@reviews.length} reviews" %></em>
         <div class="table-responsive">
@@ -51,11 +53,11 @@
       <div class="col-md-7 col-md-offset-1">
         <h1 class="review_title"><%= @movie.title %></h1>
         <p><%= @movie.description %></p>
-
-        <% if @reviews.blank? %>
-          <h3>No reviews just yet, would you like to add the first!</h3>
-          <%= link_to "Write Review", new_movie_review_path(@movie), class: "btn btn-danger" %>
-        <% else %>
+        <% if !current_user.has_role? :admin %>
+          <% if @reviews.blank? %>
+            <h3>No reviews just yet, would you like to add the first!</h3>
+            <%= link_to "Write Review", new_movie_review_path(@movie), class: "btn btn-danger" %>
+          <% else %>
           <% @reviews.each do |review| %>
             <div class="reviews">
               <p>Username: <%= review.user.full_name%>
@@ -66,12 +68,15 @@
           <% end %>
         <% end %>
         <% if @movie.reviews.present? %>
-        <%= link_to "Write a Review", new_movie_review_path(@movie) %>
+        <%= link_to "Write a Review", new_movie_review_path(@movie), :class=> "btn btn-primary"  %>
+        <% end %>
         <% end %>
       </div>
     </div>
-      <%= link_to 'Edit Movie!', edit_movie_path(@movie) %> |
-      <%= link_to 'Back to Home Page', movies_path %>
+      <% if current_user.has_role? :admin %>
+        <%= link_to 'Edit Movie!', edit_movie_path(@movie) , :class=> "btn btn-primary" %> |
+      <% end %>
+      <%= link_to 'Back to Home Page', movies_path, :class=> "btn btn-primary"  %>
     </div>
   </div>
 </div>

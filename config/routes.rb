@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
 
   resources :movies do
+    collection do
+      get :top_rated_movies
+    end
     resources :reviews, except: [:show, :index]
     resources :bookings
     end

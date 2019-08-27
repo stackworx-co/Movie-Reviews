@@ -11,7 +11,8 @@ class Ability
 
         can :manage, :all
       else
-         can :read, :all
+         can :manage, :all
+         # can [:index, :top_rated_movies], :Movie
        end
     #
     # The first argument to `can` is the action you are giving the user

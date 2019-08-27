@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row">
     <% if !user_signed_in? %>
       <div class="jumbotron">
@@ -7,17 +7,19 @@
         <p><%= link_to "Sign Up To Write A Review", new_user_registration_path, class: "btn btn-primary btn-lg" %></p>
       </div>
     <% end %>
-
-    <div class="row">
-      <% @movies.each do |movie| %>
-        <div>
-          <div class="col-sm-3" size="">
-          <%= link_to (image_tag movie.avatar.url(:medium), class: 'image', :size => "450×300"), movie %>
-        </div>
+  </div>
+  <% if !current_user.has_role? :admin %>
+    <%= link_to 'Top Rated Movies', top_rated_movies_movies_path, class: "btn btn-success" %><br><br>
+  <% end %>
+  <div class="row">
+    <% @movies.each do |movie| %>
+      <div class="col-md-3 col-sm-6 col-lg-3 movie-image-style">
+          <%= link_to (image_tag movie.avatar.url(:medium), height: '430', width: '350'), movie %>
       </div>
     <% end %>
-    </div>
   </div>
   <br>
-  <%= link_to 'New Movie', new_movie_path %>
+  <% if current_user.has_role? :admin %>
+    <%= link_to 'Create New Movie', new_movie_path, class: "btn btn-primary" %>
+  <% end %>
 </div>

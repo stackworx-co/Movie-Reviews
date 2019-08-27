@@ -19,13 +19,13 @@ class MoviesController < ApplicationController
     else
       @avg_rating = @reviews.average(:rating).round(2)
     end
- end
-  # GET /movies/new
-  # def new
-  #   @movie = Movie.new
-  # end
+  end
 
-  # GET /movies/1/edit
+  def top_rated_movies
+    #all top rated movies
+    @movies = Movie.where('avg_rating > ?', 3)
+    # authorize! :read, @movie
+  end
   def edit
   end
 
@@ -45,22 +45,6 @@ class MoviesController < ApplicationController
       end
     end
   end
-  # POST /movies
-  # POST /movies.json
-  # def create
-  #   @movie = Movie.new(movie_params)
-  #
-  #   respond_to do |format|
-  #     if @movie.save
-  #       format.html { redirect_to @movie, notice: 'Movie was successfully created.' }
-  #       format.json { render :show, status: :created, location: @movie }
-  #     else
-  #       format.html { render :new }
-  #       format.json { render json: @movie.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
-
   # PATCH/PUT /movies/1
   # PATCH/PUT /movies/1.json
   def update

@@ -1,5 +1,4 @@
 class Review < ApplicationRecord
-  # after_save :update_movie_avg_rating
   belongs_to :user
   belongs_to :movie
 

@@ -1,4 +1,7 @@
 <div class="container align-content-center">
+  <% if !current_user.has_role? :admin %>
+    <%= link_to 'Back to Movie', movie_path(@movie), :class=> "btn btn-primary"  %><br><br>
+  <% end %>
   <div class="row">
     <div class="align-content-center">
     <%= form_for([@movie, @booking] , local: true) do |form| %>
@@ -13,7 +16,7 @@
           </ul>
         </div>
       <% end %>
-      <%= image_tag @movie.avatar.url(:medium) %>
+        <%= image_tag @movie.avatar.url(:medium) %>
       <br><br>
       <div class="field">
         <span>User Name: </span>
@@ -36,7 +39,9 @@
       </div>
         <br>
       <div class="actions">
-        <%= form.submit :class => "btn btn-primary", :value=> "Create Booking"%>
+        <% if !current_user.has_role? :admin %>
+          <%= form.submit :class => "btn btn-primary", :value=> "Create Booking"%>
+        <% end %>
       </div>
     <% end %>
     </div>
