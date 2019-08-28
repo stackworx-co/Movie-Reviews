@@ -53,11 +53,13 @@
       <div class="col-md-7 col-md-offset-1">
         <h1 class="review_title"><%= @movie.title %></h1>
         <p><%= @movie.description %></p>
-        <% if !current_user.has_role? :admin %>
-          <% if @reviews.blank? %>
-            <h3>No reviews just yet, would you like to add the first!</h3>
-            <%= link_to "Write Review", new_movie_review_path(@movie), class: "btn btn-danger" %>
-          <% else %>
+        <% if @reviews.blank? %>
+          <h3>No reviews just yet
+            <% if !current_user.has_role? :admin %>
+              , would you like to add the first!</h3>
+              <%= link_to "Write Review", new_movie_review_path(@movie), class: "btn btn-danger" %>
+            <% end %>
+        <% else %>
           <% @reviews.each do |review| %>
             <div class="reviews">
               <p>Username: <%= review.user.full_name%>
@@ -67,9 +69,10 @@
             </div>
           <% end %>
         <% end %>
-        <% if @movie.reviews.present? %>
-        <%= link_to "Write a Review", new_movie_review_path(@movie), :class=> "btn btn-primary"  %>
-        <% end %>
+        <% if !current_user.has_role? :admin %>
+          <% if @movie.reviews.present? %>
+            <%= link_to "Write a Review", new_movie_review_path(@movie), :class=> "btn btn-primary"  %>
+          <% end %>
         <% end %>
       </div>
     </div>
